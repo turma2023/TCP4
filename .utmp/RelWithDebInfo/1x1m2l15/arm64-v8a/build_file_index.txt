@@ -1,0 +1,3 @@
+/home/fabio/Documentos/IFRJ/Periodo_4/TCP/TCP4/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/CMakeLists.txt
+/home/fabio/Documentos/IFRJ/Periodo_4/TCP/TCP4/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/FramePacing/CMakeLists.txt
+/home/fabio/Documentos/IFRJ/Periodo_4/TCP/TCP4/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/cpp/GameActivity/CMakeLists.txt

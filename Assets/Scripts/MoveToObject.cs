@@ -14,9 +14,11 @@ public class MoveToObject : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !isMoving)
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began || Input.GetMouseButtonDown(0) && !isMoving)
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            Touch touch = Input.GetTouch(0);
+            Ray ray = Camera.main.ScreenPointToRay(touch.position);
+            // Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
             Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red, 2f);
