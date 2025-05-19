@@ -1,0 +1,45 @@
+{
+    "name": "InputPlayer",
+    "maps": [
+        {
+            "name": "PlayerInput",
+            "id": "6d9cb0ff-099a-403f-997e-8d46f3dbb17d",
+            "actions": [
+                {
+                    "name": "Touch",
+                    "type": "Button",
+                    "id": "a051a4bc-0f81-46ca-8b49-4a9105834f92",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0b26aebe-8638-4da7-addd-b21ea12085e8",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Touch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "908b20ac-9e81-4459-9b71-9cd1e4e7ede4",
+                    "path": "<Touchscreen>/Press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Touch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

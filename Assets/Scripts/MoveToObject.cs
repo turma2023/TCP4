@@ -4,21 +4,42 @@ using System.Collections;
 public class MoveToObject : MonoBehaviour
 {
     private Transform player;
+    private InputController inputController;
     public float speed = 5f;
-    private bool isMoving = false;
+    private bool isMoving;
+    private bool isMouse;
 
     void Start()
     {
         player = GetComponent<Transform>();
+        inputController = GetComponent<InputController>();
     }
 
     void Update()
     {
+        if (Input.touchCount > 0) isMouse = false;
+        
+        if (Input.GetMouseButtonDown(0)) isMouse = true;
+
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began || Input.GetMouseButtonDown(0) && !isMoving)
         {
-            Touch touch = Input.GetTouch(0);
-            Ray ray = Camera.main.ScreenPointToRay(touch.position);
-            // Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+
+            Ray ray;
+            if (!isMouse)
+            {
+                ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+            }
+            else
+            {
+                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            }
+        // if (inputController.Click.WasPressedThisFrame() && !isMoving)
+        // {
+        //     Debug.Log("Clique detectado");
+        //     Vector2 clickPosition = inputController.Click.ReadValue<Vector2>(); // Obtém a posição do clique/toque
+        //     Ray ray = Camera.main.ScreenPointToRay(clickPosition);
+
             RaycastHit hit;
 
             Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red, 2f);
