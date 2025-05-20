@@ -18,7 +18,7 @@ public class MoveToObject : MonoBehaviour
     void Update()
     {
         if (Input.touchCount > 0) isMouse = false;
-        
+
         if (Input.GetMouseButtonDown(0)) isMouse = true;
 
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began || Input.GetMouseButtonDown(0) && !isMoving)
@@ -34,11 +34,11 @@ public class MoveToObject : MonoBehaviour
             {
                 ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             }
-        // if (inputController.Click.WasPressedThisFrame() && !isMoving)
-        // {
-        //     Debug.Log("Clique detectado");
-        //     Vector2 clickPosition = inputController.Click.ReadValue<Vector2>(); // Obtém a posição do clique/toque
-        //     Ray ray = Camera.main.ScreenPointToRay(clickPosition);
+            // if (inputController.Click.WasPressedThisFrame() && !isMoving)
+            // {
+            //     Debug.Log("Clique detectado");
+            //     Vector2 clickPosition = inputController.Click.ReadValue<Vector2>(); // Obtém a posição do clique/toque
+            //     Ray ray = Camera.main.ScreenPointToRay(clickPosition);
 
             RaycastHit hit;
 
@@ -59,13 +59,27 @@ public class MoveToObject : MonoBehaviour
     {
         isMoving = true;
         float distanciaSegura = 1.5f;
+        float toleranciaRotacao = 0.05f;
 
         Vector3 centroObjeto = objeto.bounds.center;
-        Vector3 direcao = (centroObjeto - player.position).normalized;
-        Vector3 distanciaObject = centroObjeto - (direcao * distanciaSegura);
+        Vector3 direcaoCompleta = (centroObjeto - player.position).normalized;
+
+        Vector3 direcaoY = new Vector3(direcaoCompleta.x, 0f, direcaoCompleta.z).normalized;
+
+        Vector3 distanciaObject = centroObjeto - (direcaoCompleta * distanciaSegura);
         Vector3 destinoAjustado = new Vector3(distanciaObject.x, player.position.y, distanciaObject.z);
 
+        // Rotação
+        Quaternion rotacaoY = Quaternion.LookRotation(direcaoY);
+        while (Quaternion.Angle(player.rotation, Quaternion.Euler(0f, rotacaoY.eulerAngles.y, 0f)) > toleranciaRotacao)
+        {
+            Quaternion rotacaoAtualY = Quaternion.Euler(0f, player.rotation.eulerAngles.y, 0f);
+            Quaternion rotacaoFinalY = Quaternion.Euler(0f, rotacaoY.eulerAngles.y, 0f);
+            player.rotation = Quaternion.Slerp(rotacaoAtualY, rotacaoFinalY, speed * Time.deltaTime);
+            yield return null;
+        }
 
+        // Movimentação
         while (Vector3.Distance(player.position, destinoAjustado) > 0.4f)
         {
             player.position = Vector3.Lerp(player.position, destinoAjustado, speed * Time.deltaTime);
@@ -74,4 +88,5 @@ public class MoveToObject : MonoBehaviour
 
         isMoving = false;
     }
+
 }
