@@ -4,22 +4,26 @@ using TMPro;
 using System.Collections;
 
 public class ClickButton : MonoBehaviour {
-	private Button Button;
-    
+    private Button Button;
+    GameObject canvas;
     public GameObject letter;
-    public TMP_Text textLetter;
+
+    public Inventory inventory;
 
     void Start()
     {
+        canvas = transform.parent.gameObject;
+        Debug.Log(canvas.gameObject.name);
         Button = GetComponent<Button>();
         Button.onClick.AddListener(TaskOnClick);
-        textLetter = letter.GetComponentInChildren<TMP_Text>();
         gameObject.SetActive(false);
-        letter.SetActive(false);
-	}
+    }
 
-	void TaskOnClick(){
-        letter.SetActive(true);
+    void TaskOnClick()
+    {
+        GameObject viewLetter = Instantiate(letter);
+        viewLetter.transform.SetParent(canvas.transform, false);
+        inventory.letters.Add(letter);
         Button.gameObject.SetActive(false);
-	}
+    }
 }
