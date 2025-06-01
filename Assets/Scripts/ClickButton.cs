@@ -10,6 +10,8 @@ public class ClickButton : MonoBehaviour {
 
     public Inventory inventory;
 
+    public GetLetter getLetter;
+
     void Start()
     {
         canvas = transform.parent.gameObject;
@@ -23,7 +25,8 @@ public class ClickButton : MonoBehaviour {
     {
         GameObject viewLetter = Instantiate(letter);
         viewLetter.transform.SetParent(canvas.transform, false);
-        inventory.letters.Add(letter);
+        inventory.letters.Add(viewLetter);
         Button.gameObject.SetActive(false);
+        getLetter.letterColected = true;
     }
 }

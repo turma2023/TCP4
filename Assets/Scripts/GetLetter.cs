@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GetCard : MonoBehaviour
+public class GetLetter : MonoBehaviour
 {
     public GameObject letter;
 
@@ -14,14 +14,14 @@ public class GetCard : MonoBehaviour
         if (!letterColected)
         {
             button.letter = letter;
+            button.getLetter = this;
             button.gameObject.SetActive(true);
-            letterColected = true;
         }
     }
     
     private void OnTriggerExit(Collider other)
     {
-        if (letterColected) {
+        if (!letterColected) {
             button.letter.SetActive(false);
             button.gameObject.SetActive(false);
         }
