@@ -6,7 +6,7 @@ public class Inventory : MonoBehaviour
 {
     
     public List<GameObject> letters = new List<GameObject>();
-
+    public List<GameObject> keys = new List<GameObject>();
 
     void Start()
     {

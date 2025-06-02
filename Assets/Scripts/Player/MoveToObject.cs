@@ -9,14 +9,20 @@ public class MoveToObject : MonoBehaviour
     private bool isMoving;
     private bool isMouse;
 
+    private ExamineMode examineMode;
+
+
     void Start()
     {
         player = GetComponent<Transform>();
         inputController = GetComponent<InputController>();
+        examineMode = GetComponent<ExamineMode>();
     }
 
     void Update()
     {
+        if (examineMode.IsExamineMode) return;
+
         if (Input.touchCount > 0) isMouse = false;
 
         if (Input.GetMouseButtonDown(0)) isMouse = true;
@@ -28,11 +34,11 @@ public class MoveToObject : MonoBehaviour
             Ray ray;
             if (!isMouse)
             {
-                ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+                ray = examineMode.MainCamera.ScreenPointToRay(Input.GetTouch(0).position);
             }
             else
             {
-                ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                ray = examineMode.MainCamera.ScreenPointToRay(Input.mousePosition);
             }
             // if (inputController.Click.WasPressedThisFrame() && !isMoving)
             // {

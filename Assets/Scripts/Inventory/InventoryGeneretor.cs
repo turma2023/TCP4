@@ -11,26 +11,10 @@ public class InventoryGeneretor : MonoBehaviour
     public GameObject content;
     private List<GameObject> buttons = new List<GameObject>();
 
-
-    // void Start()
-    // {
-
-    //     foreach (GameObject letter in inventory.letters)
-    //     {
-    //         Debug.Log("Adding letter: " + letter.name);
-    //         Button newButton = Instantiate(buttonPrefab, content.transform);
-    //         newButton.transform.SetParent(content.transform, false);
-    //         newButton.GetComponentInChildren<TextMeshProUGUI>().text = letter.name;
-    //         newButton.onClick.AddListener(() => ShowLetter(letter));
-    //         buttons.Add(newButton.gameObject);
-    //     }
-
-    // }
-
     void Update()
     {
 
-        if (buttons.Count != inventory.letters.Count)
+        if (buttons.Count != (inventory.letters.Count + inventory.keys.Count))
         {
             UpdateButtons();
         }
@@ -47,17 +31,24 @@ public class InventoryGeneretor : MonoBehaviour
 
         foreach (GameObject letter in inventory.letters)
         {
-            Debug.Log("Adding letter: " + letter.name);
             Button newButton = Instantiate(buttonPrefab, content.transform);
             newButton.transform.SetParent(content.transform, false);
             newButton.GetComponentInChildren<TextMeshProUGUI>().text = letter.name;
             newButton.onClick.AddListener(() => ShowLetter(letter));
             buttons.Add(newButton.gameObject);
         }
+
+        foreach (GameObject key in inventory.keys)
+        {
+            Button newButton = Instantiate(buttonPrefab, content.transform);
+            newButton.transform.SetParent(content.transform, false);
+            newButton.GetComponentInChildren<TextMeshProUGUI>().text = key.name;
+            // newButton.onClick.AddListener(() => ShowLetter(key));
+            buttons.Add(newButton.gameObject);
+        }
     }
     private void ShowLetter(GameObject letter)
     {
-
         letter.SetActive(true);
     }
 

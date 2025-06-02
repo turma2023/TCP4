@@ -15,7 +15,6 @@ public class ClickButton : MonoBehaviour {
     void Start()
     {
         canvas = transform.parent.gameObject;
-        Debug.Log(canvas.gameObject.name);
         Button = GetComponent<Button>();
         Button.onClick.AddListener(TaskOnClick);
         gameObject.SetActive(false);
