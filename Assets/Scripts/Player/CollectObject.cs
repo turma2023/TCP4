@@ -52,6 +52,7 @@ public class CollectObject : MonoBehaviour
                         {
                             key.isCollected = true;
                             GameObject keyObject = key.gameObject;
+                            keyObject.name = key.keyName; 
                             inventory.keys.Add(keyObject);
                             key.gameObject.SetActive(false);
                             // Destroy(key.gameObject);

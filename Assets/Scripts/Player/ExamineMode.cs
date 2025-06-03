@@ -8,22 +8,12 @@ public class ExamineMode : MonoBehaviour
     public Camera MainCamera ;
     public Camera ExamineCamera;
 
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    }
 
     public void ActiveMode()
     {
         MainCamera.enabled = false;
         ExamineCamera.enabled = true;
         IsExamineMode = true;
-        Debug.Log("ativar: " + IsExamineMode);
 
     }
 
@@ -32,7 +22,6 @@ public class ExamineMode : MonoBehaviour
         MainCamera.enabled = true;
         ExamineCamera.enabled = false;
         IsExamineMode = false;
-        Debug.Log("desativar: " + IsExamineMode);
         
     }
 }
