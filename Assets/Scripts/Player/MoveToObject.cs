@@ -5,7 +5,7 @@ public class MoveToObject : MonoBehaviour
 {
     private Transform player;
     private InputController inputController;
-    public float speed = 5f;
+    public float speed = 50f;
     private bool isMoving;
     private bool isMouse;
 
