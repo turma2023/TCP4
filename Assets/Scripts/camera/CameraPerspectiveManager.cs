@@ -5,9 +5,11 @@ public class CameraPerspectiveManager : MonoBehaviour
 {
     private Rigidbody rigidbody;
     private Quaternion latestOrietation;
+    private MoveToObject moveToObject;
     void Start()
     {
         rigidbody = GetComponent<Rigidbody>();
+        moveToObject = GetComponent<MoveToObject>();
     }
 
     void Update()
@@ -19,14 +21,24 @@ public class CameraPerspectiveManager : MonoBehaviour
 
     public void RotateLeft()
     {
+        moveToObject.CanMove = false;
         latestOrietation = rigidbody.rotation * Quaternion.Euler(0, -90, 0);
-        transform.DORotate(latestOrietation.eulerAngles, 0.3f).SetEase(Ease.OutSine);
+        transform.DORotate(latestOrietation.eulerAngles, 0.3f).SetEase(Ease.OutSine).OnComplete(() =>
+        {
+            moveToObject.CanMove = true;
+            ResetPerspectiveInstantly();
+        });
     }
 
     public void RotateRight()
     {
+        moveToObject.CanMove = false;
         latestOrietation = rigidbody.rotation * Quaternion.Euler(0, 90, 0);
-        transform.DORotate(latestOrietation.eulerAngles, 0.3f).SetEase(Ease.OutSine);
+        transform.DORotate(latestOrietation.eulerAngles, 0.3f).SetEase(Ease.OutSine).OnComplete(() =>
+        {
+            moveToObject.CanMove = true;
+            ResetPerspectiveInstantly();
+        });
     }
 
     public void RotateUp()
@@ -41,7 +53,13 @@ public class CameraPerspectiveManager : MonoBehaviour
 
     public void ResetPerspective()
     {
-        gameObject.transform.DOMove(new Vector3(0, 1.4f, 0), 0.6f).SetEase(Ease.OutSine);
-        gameObject.transform.DORotate(latestOrietation.eulerAngles, 0.6f).SetEase(Ease.OutSine);
+        moveToObject.CanMove = false;
+        gameObject.transform.DOMove(new Vector3(-3.03611159e-07f, 1.50000012f, -6.19663538e-08f), 0.6f).SetEase(Ease.OutSine);
+        gameObject.transform.DORotate(latestOrietation.eulerAngles, 0.6f).SetEase(Ease.OutSine).OnComplete(() => moveToObject.CanMove = true);
+    }
+    public void ResetPerspectiveInstantly()
+    {
+        gameObject.transform.DOMove(new Vector3(-3.03611159e-07f, 1.50000012f, -6.19663538e-08f), 0f).SetEase(Ease.OutSine);
+        gameObject.transform.DORotate(latestOrietation.eulerAngles, 0f).SetEase(Ease.OutSine);
     }
 }

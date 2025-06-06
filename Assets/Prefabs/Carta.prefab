@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2933890190221003788}
   - component: {fileID: 7578703921743022330}
   - component: {fileID: 4310854866969252083}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Btn_fechar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -142,7 +142,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6135397420613345801}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Carta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ GameObject:
   - component: {fileID: 2034335451458048308}
   - component: {fileID: 8072122345114780811}
   - component: {fileID: 268479518902507585}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -393,7 +393,7 @@ GameObject:
   - component: {fileID: 2106778241923510416}
   - component: {fileID: 3581755955589634127}
   - component: {fileID: 8571968295376230913}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

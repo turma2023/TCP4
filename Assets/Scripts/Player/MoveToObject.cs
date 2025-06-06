@@ -11,6 +11,8 @@ public class MoveToObject : MonoBehaviour
 
     private ExamineMode examineMode;
 
+    public bool CanMove { get; set; } = true;
+
 
     void Start()
     {
@@ -21,6 +23,7 @@ public class MoveToObject : MonoBehaviour
 
     void Update()
     {
+        if (!CanMove) return;
         if (examineMode.IsExamineMode) return;
 
         if (Input.touchCount > 0) isMouse = false;
@@ -63,6 +66,8 @@ public class MoveToObject : MonoBehaviour
 
     IEnumerator MovePlayer(Collider objeto)
     {
+        if (!CanMove) yield break;
+
         isMoving = true;
         float distanciaSegura = 1.5f;
         float toleranciaRotacao = 0.05f;
@@ -82,6 +87,7 @@ public class MoveToObject : MonoBehaviour
             Quaternion rotacaoAtualY = Quaternion.Euler(0f, player.rotation.eulerAngles.y, 0f);
             Quaternion rotacaoFinalY = Quaternion.Euler(0f, rotacaoY.eulerAngles.y, 0f);
             player.rotation = Quaternion.Slerp(rotacaoAtualY, rotacaoFinalY, speed * Time.deltaTime);
+            if (!CanMove) yield break;
             yield return null;
         }
 
@@ -91,6 +97,10 @@ public class MoveToObject : MonoBehaviour
             player.position = Vector3.Lerp(player.position, destinoAjustado, speed * Time.deltaTime);
             yield return null;
         }
+
+        objeto.gameObject.TryGetComponent(out ObjectReturner collectObject);
+
+        if (collectObject != null) collectObject.EnableReturnButton();
 
         isMoving = false;
     }
