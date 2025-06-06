@@ -1,49 +1,9 @@
 fileFormatVersion: 2
-guid: a2f047aa8238cebe79b438e3bf036288
+guid: c4088b227d69f9bdf8f28af344d74ab3
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Base
-    second: {fileID: 2100000, guid: 1fcb9c9c48f4a0ff7bd6a12c7cd9903b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: DetalheTopo
-    second: {fileID: 2100000, guid: 571708d40ebaa39cd925805cc081c729, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Gaveta
-    second: {fileID: 2100000, guid: d0fb2992b24dc9a65ab4dda730646494, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Topo
-    second: {fileID: 2100000, guid: 6d46bfe2468ff1f11ba0cf3a1c424222, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Base
-    second: {fileID: 2800000, guid: 3836eb778821ac802a061231af5ada14, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Detalhe
-    second: {fileID: 2800000, guid: 7347b85cc506d8d9fb325b58684cb19a, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Gaveta
-    second: {fileID: 2800000, guid: e573fa7377e36d1c9a5525de1f38a1a9, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Topo
-    second: {fileID: 2800000, guid: b224144d25bf414a4a9009bdc6c1bd59, type: 3}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
