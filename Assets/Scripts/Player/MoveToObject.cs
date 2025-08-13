@@ -59,6 +59,13 @@ public class MoveToObject : MonoBehaviour
                 {
                     StopCoroutine("MovePlayer");
                     StartCoroutine(MovePlayer(hit.collider));
+
+                    if (hit.collider.TryGetComponent(out Espelho espelho))
+                    {
+                        Debug.Log("Espelho detectado");
+                        espelho.OnTouch();
+                    }
+
                 }
             }
         }
