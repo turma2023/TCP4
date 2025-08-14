@@ -16,7 +16,7 @@ public class Espelho : MonoBehaviour
             // Debug.Log("Espelho rachou!");
         }
 
-        if (numClicks > 5 && !flor.GetComponent<Flor>().isCollected)
+        if (numClicks > 5 && !flor.GetComponent<Flor>().IsCollected)
         {
             // Debug.Log("Espelho quebrou!");
             flor.SetActive(true);

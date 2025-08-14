@@ -1,17 +1,9 @@
 using UnityEngine;
 
-public class Perfume : MonoBehaviour
+public class Perfume : CollectableObject
 {
-    public string nome = "Perfume";
-    public bool isCollected = false;
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        CollectableType = CollectableType.Perfume;
     }
 }

@@ -1,13 +1,12 @@
 using UnityEngine;
 
-public class Key : MonoBehaviour
+public class Key : CollectableObject
 {
     public int keyId;
-    public string keyName;
     public string keyDescription;
-    public bool isCollected;
-    // public Sprite keyImage;
 
-
-
+    public void Start()
+    {
+        CollectableType = CollectableType.Key;
+    }
 }

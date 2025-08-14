@@ -11,7 +11,7 @@ public class CollectObject : MonoBehaviour
 
     void Start()
     {
-        inventory = GetComponent<Inventory>();
+        inventory = Inventory.Instance;
         examineMode = GetComponent<ExamineMode>();
     }
 
@@ -48,57 +48,68 @@ public class CollectObject : MonoBehaviour
 
                 if (hit.collider.gameObject.layer == LayerMask.NameToLayer("CollectibleObject"))
                 {
-
-                    if (hit.collider.TryGetComponent(out Key key))
+                    Debug.Log("COLLECTABLE DETECTED");
+                    if (hit.collider.TryGetComponent(out CollectableObject obj))
                     {
-                        if (!key.isCollected)
+                        if (!obj.IsCollected)
                         {
-                            key.isCollected = true;
-                            GameObject keyObject = key.gameObject;
-                            keyObject.name = key.keyName;
-                            inventory.keys.Add(keyObject);
-                            key.gameObject.SetActive(false);
-                            // Destroy(key.gameObject);
-
+                            obj.IsCollected = true;
+                            GameObject gameObject = obj.gameObject;
+                            gameObject.name = obj.Name;
+                            inventory.AddItem(obj);
+                            obj.DisableObject();
                         }
                     }
-                    else if (hit.collider.TryGetComponent(out Perfume perfume))
-                    {
-                        if (!perfume.isCollected)
-                        {
-                            perfume.isCollected = true;
-                            GameObject perfumeObject = perfume.gameObject;
-                            perfumeObject.name = perfume.name;
-                            inventory.perfume.Add(perfumeObject);
-                            perfume.gameObject.SetActive(false);
+                    //if (hit.collider.TryGetComponent(out Key key))
+                    //{
+                    //    if (!key.isCollected)
+                    //    {
+                    //        key.isCollected = true;
+                    //        GameObject keyObject = key.gameObject;
+                    //        keyObject.name = key.keyName;
+                    //        inventory.keys.Add(keyObject);
+                    //        key.gameObject.SetActive(false);
+                    //        // Destroy(key.gameObject);
 
-                        }
-                    }
-                    else if (hit.collider.TryGetComponent(out Flor flor))
-                    {
-                        if (!flor.isCollected)
-                        {
-                            flor.isCollected = true;
-                            GameObject florObject = flor.gameObject;
-                            florObject.name = flor.name;
-                            inventory.flor.Add(florObject);
-                            flor.gameObject.SetActive(false);
+                    //    }
+                    //}
+                    //else if (hit.collider.TryGetComponent(out Perfume perfume))
+                    //{
+                    //    if (!perfume.isCollected)
+                    //    {
+                    //        perfume.isCollected = true;
+                    //        GameObject perfumeObject = perfume.gameObject;
+                    //        perfumeObject.name = perfume.name;
+                    //        inventory.perfume.Add(perfumeObject);
+                    //        perfume.gameObject.SetActive(false);
 
-                        }
-                    }
+                    //    }
+                    //}
+                    //else if (hit.collider.TryGetComponent(out Flor flor))
+                    //{
+                    //    if (!flor.isCollected)
+                    //    {
+                    //        flor.isCollected = true;
+                    //        GameObject florObject = flor.gameObject;
+                    //        florObject.name = flor.name;
+                    //        inventory.flor.Add(florObject);
+                    //        flor.gameObject.SetActive(false);
 
-                    else if (hit.collider.TryGetComponent(out Diario diario))
-                    {
-                        if (!diario.isCollected)
-                        {
-                            diario.isCollected = true;
-                            GameObject diarioObject = diario.gameObject;
-                            diarioObject.name = diario.name;
-                            inventory.diario.Add(diarioObject);
-                            diario.gameObject.SetActive(false);
+                    //    }
+                    //}
 
-                        }
-                    }
+                    //else if (hit.collider.TryGetComponent(out Diario diario))
+                    //{
+                    //    if (!diario.isCollected)
+                    //    {
+                    //        diario.isCollected = true;
+                    //        GameObject diarioObject = diario.gameObject;
+                    //        diarioObject.name = diario.name;
+                    //        inventory.diario.Add(diarioObject);
+                    //        diario.gameObject.SetActive(false);
+
+                    //    }
+                    //}
 
                     // else if (hit.collider.GetComponent<Letter>() != null)
                     // {

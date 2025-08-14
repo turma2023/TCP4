@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using UnityEngine.Events;
 
-public class InventoryGeneretor : MonoBehaviour
+public class UIInventoryGeneretor : MonoBehaviour
 {
     private Inventory inventory;
     public Button buttonPrefab;
@@ -22,7 +22,8 @@ public class InventoryGeneretor : MonoBehaviour
 
     void Start()
     {
-        inventory = GetComponent<Inventory>();
+        inventory = Inventory.Instance;
+
         if (combineButton != null)
         {
             combineButton.onClick.AddListener(CombineItems);
