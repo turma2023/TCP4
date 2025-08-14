@@ -19,10 +19,10 @@ public class Door : MonoBehaviour
 
     void Update()
     {
-        if (onTrigger)
-        {
-            Debug.Log("status da porta: " + isOpen);
-        }
+        //if (onTrigger)
+        //{
+        //    Debug.Log("status da porta: " + isOpen);
+        //}
     }
 
     private void OnTriggerEnter(Collider other)
@@ -30,13 +30,16 @@ public class Door : MonoBehaviour
         onTrigger = true;
         if (!isOpen)
         {
-            btnOpenDoor.SetActive(true);
-            if (other.gameObject.GetComponent<Inventory>() != null)
+            other.gameObject.TryGetComponent(out Inventory inventory);
+            if (inventory != null)
             {
+                if (inventory.keys.Count <= 0) return;
+
+                btnOpenDoor.SetActive(true);
                 Button button = btnOpenDoor.GetComponent<Button>();
                 if (button != null)
                 {
-                    button.onClick.RemoveAllListeners();
+                    //button.onClick.RemoveAllListeners();
                     button.onClick.AddListener(() => OpenDoor(other.gameObject));
                 }
             }

@@ -18,11 +18,11 @@ public class InventoryGeneretor : MonoBehaviour
     void Update()
     {
 
-        // if (buttons.Count != (inventory.letters.Count + inventory.keys.Count))
-        // {
-        //     UpdateButtons();
-        // }
-                
+        if (buttons.Count != (inventory.letters.Count + inventory.keys.Count))
+        {
+            AllItens();
+        }
+
     }
 
     public void AllItens()

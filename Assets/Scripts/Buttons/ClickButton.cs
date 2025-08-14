@@ -3,7 +3,8 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 
-public class ClickButton : MonoBehaviour {
+public class ClickButton : MonoBehaviour
+{
     private Button Button;
     GameObject canvas;
     public GameObject letter;
@@ -27,5 +28,13 @@ public class ClickButton : MonoBehaviour {
         inventory.letters.Add(viewLetter);
         Button.gameObject.SetActive(false);
         getLetter.letterColected = true;
+
+
+        getLetter.gameObject.layer = 0;
+
+        //foreach (Transform child in obj.transform)
+        //{
+        //    SetLayerRecursively(child.gameObject, newLayer);
+        //}
     }
 }
