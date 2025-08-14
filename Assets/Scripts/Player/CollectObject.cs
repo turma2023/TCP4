@@ -18,7 +18,7 @@ public class CollectObject : MonoBehaviour
 
     void Update()
     {
-        if (!examineMode.IsExamineMode) return;
+        // if (!examineMode.IsExamineMode) return;
 
         if (Input.touchCount > 0) isMouse = false;
 
@@ -33,7 +33,9 @@ public class CollectObject : MonoBehaviour
             }
             else
             {
-                ray = examineMode.ExamineCamera.ScreenPointToRay(Input.mousePosition);
+                // ray = examineMode.ExamineCamera.ScreenPointToRay(Input.mousePosition);
+                ray = examineMode.MainCamera.ScreenPointToRay(Input.mousePosition);
+
             }
 
             RaycastHit hit;
@@ -42,23 +44,62 @@ public class CollectObject : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit))
             {
+                Debug.LogWarning("passou do raycast");
+
                 if (hit.collider.gameObject.layer == LayerMask.NameToLayer("CollectibleObject"))
                 {
-                    
-                    if (hit.collider.GetComponent<Key>() != null)
+
+                    if (hit.collider.TryGetComponent(out Key key))
                     {
-                        Key key = hit.collider.GetComponent<Key>();
                         if (!key.isCollected)
                         {
                             key.isCollected = true;
                             GameObject keyObject = key.gameObject;
-                            keyObject.name = key.keyName; 
+                            keyObject.name = key.keyName;
                             inventory.keys.Add(keyObject);
                             key.gameObject.SetActive(false);
                             // Destroy(key.gameObject);
 
                         }
                     }
+                    else if (hit.collider.TryGetComponent(out Perfume perfume))
+                    {
+                        if (!perfume.isCollected)
+                        {
+                            perfume.isCollected = true;
+                            GameObject perfumeObject = perfume.gameObject;
+                            perfumeObject.name = perfume.name;
+                            inventory.perfume.Add(perfumeObject);
+                            perfume.gameObject.SetActive(false);
+
+                        }
+                    }
+                    else if (hit.collider.TryGetComponent(out Flor flor))
+                    {
+                        if (!flor.isCollected)
+                        {
+                            flor.isCollected = true;
+                            GameObject florObject = flor.gameObject;
+                            florObject.name = flor.name;
+                            inventory.flor.Add(florObject);
+                            flor.gameObject.SetActive(false);
+
+                        }
+                    }
+
+                    else if (hit.collider.TryGetComponent(out Diario diario))
+                    {
+                        if (!diario.isCollected)
+                        {
+                            diario.isCollected = true;
+                            GameObject diarioObject = diario.gameObject;
+                            diarioObject.name = diario.name;
+                            inventory.diario.Add(diarioObject);
+                            diario.gameObject.SetActive(false);
+
+                        }
+                    }
+
                     // else if (hit.collider.GetComponent<Letter>() != null)
                     // {
                     //     Letter letter = hit.collider.GetComponent<Letter>();

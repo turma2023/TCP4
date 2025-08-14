@@ -9,6 +9,10 @@ public class GetLetter : MonoBehaviour
 
     [SerializeField] private ClickButton button;
 
+    private void Start()
+    {
+        gameObject.layer = LayerMask.NameToLayer("ClickMove");
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (!letterColected)

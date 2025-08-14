@@ -2,9 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.Collections;
+using System;
 
-public class ClickButton : MonoBehaviour
-{
+public class ClickButton : MonoBehaviour {
     private Button Button;
     GameObject canvas;
     public GameObject letter;
@@ -17,8 +17,8 @@ public class ClickButton : MonoBehaviour
     {
         canvas = transform.parent.gameObject;
         Button = GetComponent<Button>();
-        Button.onClick.AddListener(TaskOnClick);
         gameObject.SetActive(false);
+        Button.onClick.AddListener(TaskOnClick);
     }
 
     void TaskOnClick()
@@ -29,12 +29,15 @@ public class ClickButton : MonoBehaviour
         Button.gameObject.SetActive(false);
         getLetter.letterColected = true;
 
+        if (getLetter.letterColected == true)
+        {
+            getLetter.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast"); 
 
-        getLetter.gameObject.layer = 0;
-
-        //foreach (Transform child in obj.transform)
-        //{
-        //    SetLayerRecursively(child.gameObject, newLayer);
-        //}
+            foreach (Transform child in getLetter.gameObject.transform)
+            {
+                child.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+            }
+        }
+        
     }
 }

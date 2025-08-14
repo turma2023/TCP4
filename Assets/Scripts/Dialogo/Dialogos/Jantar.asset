@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7b7d7402b4b71f3a8ac4392e446a3b1, type: 3}
+  m_Name: Jantar
+  m_EditorClassIdentifier: 
+  dialogos:
+  - imagemFundoTexto: {fileID: 21300000, guid: 687cf6aa31e235cec8355a2a26ee8f39, type: 3}
+    imagemPersonagem: {fileID: 21300000, guid: c94d799b3eadbddbab0db625328174b4, type: 3}
+    texto: "Sauda\xE7\xF5es, Augusta Princesa! Quanto tempo se passou desde nossa
+      \xFAltima conviv\xEAncia\u2026 Julguei, por instantes, que Vossa Alteza jamais
+      lograria aqui chegar."
+  - imagemFundoTexto: {fileID: 21300000, guid: 687cf6aa31e235cec8355a2a26ee8f39, type: 3}
+    imagemPersonagem: {fileID: 21300000, guid: c94d799b3eadbddbab0db625328174b4, type: 3}
+    texto: "E como passam Suas Majestades, vossos dign\xEDssimos pais? Rogo que se
+      sinta em plena liberdade em nossa modesta mesa, preparada especialmente por
+      um de nossos cativos cozinheiros."
+  - imagemFundoTexto: {fileID: 21300000, guid: 687cf6aa31e235cec8355a2a26ee8f39, type: 3}
+    imagemPersonagem: {fileID: 21300000, guid: c94d799b3eadbddbab0db625328174b4, type: 3}
+    texto: "Caso algo n\xE3o seja de vosso agrado, rogo que me comunique sem reservas,
+      para que eu pr\xF3prio providencie a pronta corre\xE7\xE3o."
+  - imagemFundoTexto: {fileID: 21300000, guid: 687cf6aa31e235cec8355a2a26ee8f39, type: 3}
+    imagemPersonagem: {fileID: 21300000, guid: 5a87b148bdf444d44baf8bf9ab0dc729, type: 3}
+    texto: "[sorrindo] Agrade\xE7o-vos imensamente, meu dileto Dom, mas creio que
+      tal dilig\xEAncia n\xE3o se far\xE1 mister."

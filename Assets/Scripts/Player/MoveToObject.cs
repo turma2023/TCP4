@@ -11,7 +11,8 @@ public class MoveToObject : MonoBehaviour
 
     private ExamineMode examineMode;
 
-    [field:SerializeField] public bool CanMove { get; set; } = true;
+    public bool CanMove { get; set; } = true;
+
 
     void Start()
     {
@@ -20,7 +21,7 @@ public class MoveToObject : MonoBehaviour
         examineMode = GetComponent<ExamineMode>();
     }
 
-    void LateUpdate()
+    void Update()
     {
         if (!CanMove) return;
         if (examineMode.IsExamineMode) return;
@@ -51,15 +52,20 @@ public class MoveToObject : MonoBehaviour
             RaycastHit hit;
 
             Debug.DrawRay(ray.origin, ray.direction * 100f, Color.red, 2f);
-            RaycastHit[] hits = Physics.RaycastAll(ray, 200);
 
-            foreach (var hitted in hits)
+            if (Physics.Raycast(ray, out hit))
             {
-                if (hitted.collider.gameObject.layer == LayerMask.NameToLayer("ClickMove"))
+                if (hit.collider.gameObject.layer == LayerMask.NameToLayer("ClickMove"))
                 {
                     StopCoroutine("MovePlayer");
-                    Debug.Log(hitted.collider.gameObject.name);
-                    StartCoroutine(MovePlayer(hitted.collider));
+                    StartCoroutine(MovePlayer(hit.collider));
+
+                    if (hit.collider.TryGetComponent(out Espelho espelho))
+                    {
+                        Debug.Log("Espelho detectado");
+                        espelho.OnTouch();
+                    }
+
                 }
             }
         }
@@ -68,6 +74,7 @@ public class MoveToObject : MonoBehaviour
     IEnumerator MovePlayer(Collider objeto)
     {
         if (!CanMove) yield break;
+
         isMoving = true;
         float distanciaSegura = 1.5f;
         float toleranciaRotacao = 0.05f;
@@ -87,8 +94,8 @@ public class MoveToObject : MonoBehaviour
             Quaternion rotacaoAtualY = Quaternion.Euler(0f, player.rotation.eulerAngles.y, 0f);
             Quaternion rotacaoFinalY = Quaternion.Euler(0f, rotacaoY.eulerAngles.y, 0f);
             player.rotation = Quaternion.Slerp(rotacaoAtualY, rotacaoFinalY, speed * Time.deltaTime);
-            yield return null;
             if (!CanMove) yield break;
+            yield return null;
         }
 
         // Movimentação
@@ -98,27 +105,9 @@ public class MoveToObject : MonoBehaviour
             yield return null;
         }
 
-        objeto.gameObject.TryGetComponent(out EnableReturnButton returnButton);
-        objeto.gameObject.TryGetComponent(out Door door);
-        gameObject.TryGetComponent(out Inventory inventory);
+        objeto.gameObject.TryGetComponent(out ObjectReturner collectObject);
 
-        if (returnButton != null)
-        {
-
-            if (door != null)
-            {
-                if (inventory.keys.Count <= 0 || door.isOpen)
-                {
-                    returnButton.EnableReturn();
-                     isMoving = false;
-                    yield break;
-                }
-            }
-
-            returnButton.EnableReturn();
-        }
-
-
+        if (collectObject != null) collectObject.EnableReturnButton();
 
         isMoving = false;
     }
