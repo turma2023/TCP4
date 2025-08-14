@@ -6,7 +6,7 @@ public class ActiveDialog : MonoBehaviour
     public DialogManager dialogManager;
     void Start()
     {
-        dialogManager.IniciarDialogo(dialogAsset);
+        // dialogManager.IniciarDialogo(dialogAsset);
     }
 
 }

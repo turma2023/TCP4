@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
 using TMPro;
+using System;
 
 
 public class DialogManager : MonoBehaviour
@@ -18,22 +19,35 @@ public class DialogManager : MonoBehaviour
     private Queue<DialogoUnidade> filaDeDialogos = new Queue<DialogoUnidade>();
     private bool estaDigitando = false;
     private string textoAtual = "";
+    public Animator animator;
+    private string fadeInAnimation;
+    private string fadeOutAnimation;
+
+    private CutSceneManager cutSceneManager;
+
     void Start()
     {
         botaoAvancar.onClick.AddListener(ExibirProximoDialogo);
+        cutSceneManager = GetComponent<CutSceneManager>();
+        // animator = GetComponent<Animator>();
     }
-    public void IniciarDialogo(DialogAsset dialogoAsset)
+    public void IniciarDialogo(DialogAsset dialogoAsset, string FadeInAnimation, string FadeOutAnimation)
     {
-        painelDialogo.SetActive(true);
+        fadeInAnimation = FadeInAnimation;
+        fadeOutAnimation = FadeOutAnimation;
+        // animator.SetBool(fadeInAnimation, true);
+        // if (animator.GetCurrentAnimatorStateInfo(0).IsName(fadeInAnimation))
+        // {
+            painelDialogo.SetActive(true);
 
-        filaDeDialogos.Clear();
-        foreach (DialogoUnidade unidade in dialogoAsset.dialogos)
-        {
-            filaDeDialogos.Enqueue(unidade);
-        }
+            filaDeDialogos.Clear();
+            foreach (DialogoUnidade unidade in dialogoAsset.dialogos)
+            {
+                filaDeDialogos.Enqueue(unidade);
+            }
 
-        // Inicia a exibição do primeiro diálogo
-        ExibirProximoDialogo();
+            ExibirProximoDialogo();
+        // }
     }
 
     public void ExibirProximoDialogo()
@@ -50,6 +64,11 @@ public class DialogManager : MonoBehaviour
 
         if (filaDeDialogos.Count == 0)
         {
+            animator.SetBool(fadeInAnimation, false);
+            animator.SetBool(fadeOutAnimation, true);
+            Debug.Log("entrou aqui");
+
+            NextAimation();
             painelDialogo.SetActive(false);
             return;
         }
@@ -76,6 +95,19 @@ public class DialogManager : MonoBehaviour
 
         estaDigitando = false;
         botaoAvancar.GetComponentInChildren<TextMeshProUGUI>().text = "Proximo";
+    }
+
+    private void NextAimation()
+    {
+        switch (fadeOutAnimation)
+        {
+            case "FadeOutChegada":
+                cutSceneManager.isDialogoJantar = true;
+                break;
+            case "FadeOutJantar":
+                cutSceneManager.isDialogoQuarto = true;
+                break;
+        }
     }
 
 
