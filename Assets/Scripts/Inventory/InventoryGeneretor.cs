@@ -1,109 +1,3 @@
-// using UnityEngine;
-// using UnityEngine.UI;
-// using TMPro;
-// using System.Collections.Generic;
-
-// public class InventoryGeneretor : MonoBehaviour
-// {
-
-//     private Inventory inventory;
-//     public Button buttonPrefab;
-//     public GameObject content;
-//     private List<GameObject> buttons = new List<GameObject>();
-
-//     void Start()
-//     {
-//         inventory = GetComponent<Inventory>();
-//     }
-//     void Update()
-//     {
-
-//         // if (buttons.Count != (inventory.letters.Count + inventory.keys.Count))
-//         // {
-//         //     UpdateButtons();
-//         // }
-
-//     }
-
-//     public void AllItens()
-//     {
-
-//         if (inventory == null)
-//         {
-//             Debug.LogWarning("Iventario nulo");
-//         }
-
-//         DestroyButtons();
-
-//         foreach (GameObject letter in inventory.letters)
-//         {
-//             Button newButton = Instantiate(buttonPrefab, content.transform);
-//             newButton.transform.SetParent(content.transform, false);
-//             newButton.GetComponentInChildren<TextMeshProUGUI>().text = letter.name;
-//             newButton.onClick.AddListener(() => ShowLetter(letter));
-//             buttons.Add(newButton.gameObject);
-//         }
-
-//         foreach (GameObject key in inventory.keys)
-//         {
-//             Button newButton = Instantiate(buttonPrefab, content.transform);
-//             newButton.transform.SetParent(content.transform, false);
-//             newButton.GetComponentInChildren<TextMeshProUGUI>().text = key.name;
-//             // newButton.onClick.AddListener(() => ShowLetter(key));
-//             buttons.Add(newButton.gameObject);
-//         }
-
-//         foreach (GameObject perfume in inventory.perfume)
-//         {
-//             Button newButton = Instantiate(buttonPrefab, content.transform);
-//             newButton.transform.SetParent(content.transform, false);
-//             newButton.GetComponentInChildren<TextMeshProUGUI>().text = perfume.name;
-//             // newButton.onClick.AddListener(() => ShowLetter(key));
-//             buttons.Add(newButton.gameObject);
-//         }
-
-//         foreach (GameObject flor in inventory.flor)
-//         {
-//             Button newButton = Instantiate(buttonPrefab, content.transform);
-//             newButton.transform.SetParent(content.transform, false);
-//             newButton.GetComponentInChildren<TextMeshProUGUI>().text = flor.name;
-//             // newButton.onClick.AddListener(() => ShowLetter(key));
-//             buttons.Add(newButton.gameObject);
-//         }
-
-//     }
-
-//     public void Keys()
-//     {
-//         DestroyButtons();
-//         foreach (GameObject key in inventory.keys)
-//         {
-//             Button newButton = Instantiate(buttonPrefab, content.transform);
-//             newButton.transform.SetParent(content.transform, false);
-//             newButton.GetComponentInChildren<TextMeshProUGUI>().text = key.name;
-//             // newButton.onClick.AddListener(() => ShowLetter(key));
-//             buttons.Add(newButton.gameObject);
-//         }
-//     }
-
-
-//     private void DestroyButtons()
-//     {
-//         foreach (GameObject button in buttons)
-//         {
-//             Destroy(button);
-//         }
-//         buttons.Clear();
-//     }
-
-//     private void ShowLetter(GameObject letter)
-//     {
-//         letter.SetActive(true);
-//     }
-
-// }
-
-
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -153,14 +47,6 @@ public class InventoryGeneretor : MonoBehaviour
     }
     private void Letters()
     {
-        // foreach (GameObject letter in inventory.letters)
-        // {
-        //     Button newButton = Instantiate(buttonPrefab, content.transform);
-        //     newButton.transform.SetParent(content.transform, false);
-        //     newButton.GetComponentInChildren<TextMeshProUGUI>().text = letter.name;
-        //     newButton.onClick.AddListener(() => letter.SetActive(true));
-        //     buttons.Add(newButton.gameObject);
-        // }
         foreach (GameObject letter in inventory.letters)
         {
             CreateItemButton(letter, () => letter.SetActive(true));
@@ -168,53 +54,21 @@ public class InventoryGeneretor : MonoBehaviour
     }
     private void Keys()
     {
-        // foreach (GameObject key in inventory.keys)
-        // {
-        //     Button newButton = Instantiate(buttonPrefab, content.transform);
-        //     newButton.transform.SetParent(content.transform, false);
-        //     newButton.GetComponentInChildren<TextMeshProUGUI>().text = key.name;
-        //     // newButton.onClick.AddListener(() => ShowLetter(key));
-        //     buttons.Add(newButton.gameObject);
-        // }
         foreach (GameObject key in inventory.keys)
             CreateItemButton(key);
     }
     private void Perfume()
     {
-        // foreach (GameObject perfume in inventory.perfume)
-        // {
-        //     Button newButton = Instantiate(buttonPrefab, content.transform);
-        //     newButton.transform.SetParent(content.transform, false);
-        //     newButton.GetComponentInChildren<TextMeshProUGUI>().text = perfume.name;
-        //     // newButton.onClick.AddListener(() => ShowLetter(key));
-        //     buttons.Add(newButton.gameObject);
-        // }
         foreach (GameObject perfume in inventory.perfume)
             CreateItemButton(perfume);
     }
     private void Flor()
     {
-        // foreach (GameObject flor in inventory.flor)
-        // {
-        //     Button newButton = Instantiate(buttonPrefab, content.transform);
-        //     newButton.transform.SetParent(content.transform, false);
-        //     newButton.GetComponentInChildren<TextMeshProUGUI>().text = flor.name;
-        //     // newButton.onClick.AddListener(() => ShowLetter(key));
-        //     buttons.Add(newButton.gameObject);
-        // }
         foreach (GameObject flor in inventory.flor)
             CreateItemButton(flor);
     }
     private void Diario()
     {
-        // foreach (GameObject diario in inventory.diario)
-        // {
-        //     Button newButton = Instantiate(buttonPrefab, content.transform);
-        //     newButton.transform.SetParent(content.transform, false);
-        //     newButton.GetComponentInChildren<TextMeshProUGUI>().text = diario.name;
-        //     // newButton.onClick.AddListener(() => ShowLetter(key));
-        //     buttons.Add(newButton.gameObject);
-        // }
         foreach (GameObject diario in inventory.diario)
             CreateItemButton(diario);
     }
@@ -246,18 +100,18 @@ public class InventoryGeneretor : MonoBehaviour
 
         newButton.GetComponentInChildren<TextMeshProUGUI>().text = item.name;
 
+        SpriteButton spriteButton = item.GetComponent<SpriteButton>();
         Image buttonImage = newButton.GetComponent<Image>();
+    
+        buttonImage.color = normalColor;
         if (inventory.selectedItems.Contains(item))
-        {
             buttonImage.color = selectedColor;
-        }
-        else
-        {
-            buttonImage.color = normalColor;
-        }
 
-        // newButton.onClick.AddListener(() => OnItemClick(item, newButton));
-        newButton.onClick.AddListener(action);
+        if (spriteButton != null)
+            buttonImage.sprite = spriteButton.sprite; 
+
+        if (action != null)
+            newButton.onClick.AddListener(action);
 
         buttons.Add(newButton.gameObject);
     }
@@ -355,15 +209,6 @@ public class InventoryGeneretor : MonoBehaviour
         }
         buttons.Clear();
     }
-
-    // public void Keys()
-    // {
-    //     DestroyButtons();
-    //     foreach (GameObject key in inventory.keys)
-    //     {
-    //         CreateItemButton(key);
-    //     }
-    // }
 
     private void RemoveItemInventory(GameObject item)
     {
